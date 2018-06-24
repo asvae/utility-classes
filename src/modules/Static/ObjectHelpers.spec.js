@@ -13,13 +13,13 @@ describe('object helpers', () => {
         children: [ // 2
           { name: 'some-1' },
           { name: 'some-2' }, // 3
-        ]
+        ],
       },
     ]
 
     const result = ObjectHelpers.traverseBranch(
       routes,
-      { name: 'some-2' }
+      { name: 'some-2' },
     )
     expect(result.length).toBe(4)
     expect(result[0]).toBe(routes)
@@ -50,8 +50,8 @@ describe('object helpers', () => {
       expect(count).toBe(nodes)
     }
 
-    expectNodes({ one: { id: 5 }}, 2)
-    expectNodes({ one: { id: 5 }, two: { id: 6 }}, 3)
+    expectNodes({ one: { id: 5 } }, 2)
+    expectNodes({ one: { id: 5 }, two: { id: 6 } }, 3)
     expectNodes([{ id: 1 }, { id: 2 }, { id: 3 }], 4)
     expectNodes([{ id: 1 }, { id: 2 }, [{ id: 3 }]], 5)
   })
@@ -59,7 +59,7 @@ describe('object helpers', () => {
   it('hasDescendants', () => {
     expect(ObjectHelpers.hasDescendants({})).toBe(false)
     expect(ObjectHelpers.hasDescendants({ id: 1, name: 'name' })).toBe(false)
-    expect(ObjectHelpers.hasDescendants({ id: 1, name: {}})).toBe(true)
+    expect(ObjectHelpers.hasDescendants({ id: 1, name: {} })).toBe(true)
     expect(ObjectHelpers.hasDescendants({ id: 1, name: [] })).toBe(true)
 
     expect(ObjectHelpers.hasDescendants([1, 2, 3])).toBe(false)
@@ -70,7 +70,7 @@ describe('object helpers', () => {
     const before = {
       id: 5,
       product: { id: 10 },
-      booking: { fields: [{ id: 5 }, { id: 6 }] }
+      booking: { fields: [{ id: 5 }, { id: 6 }] },
     }
     const after = [
       before,

@@ -49,7 +49,7 @@ export default class ArrayHelpers {
     }, array)
   }
 
-  static fillToLength<T> (array: T[], length, fillWith: () => T): T[] {
+  static fillToLength<T> (array: T[], length: number, fillWith: () => T): T[] {
     const difference = length - array.length
     if (difference > 0) {
       return [...array, ...RandomValueGenerator.getArrayByClosure(fillWith, difference)]
@@ -141,7 +141,7 @@ export default class ArrayHelpers {
     return array.indexOf(foundItem)
   }
 
-  static replaceOnceByCondition<T> (array: T[], condition, replacement: T) {
+  static replaceOnceByCondition<T> (array: T[], condition: any, replacement: T) {
     const result = [...array]
 
     const index = ArrayHelpers.findIndexByCriteria(array, condition)
@@ -156,7 +156,7 @@ export default class ArrayHelpers {
   /**
    * Sort array by object property.
    */
-  static sortByProperty<T> (array: T[], parameter: string): T[] {
+  static sortByProperty (array: any[], parameter: string): any[] {
     const result = [...array]
     result.sort(function (a, b) {
       return a[parameter] > b[parameter] ? 1 : -1
@@ -192,7 +192,7 @@ export default class ArrayHelpers {
    * Group array into a set of arrays based on condition.
    * Condition should return a string.
    */
-  static groupByCondition<T> (array: T[], condition: (T) => string): { [key: string]: T[] } {
+  static groupByCondition<T> (array: T[], condition: (t: T) => string): { [key: string]: T[] } {
     const groups: { [key: string]: T[] } = {}
     array.forEach(item => {
       const result = condition(item)
@@ -231,7 +231,7 @@ export default class ArrayHelpers {
     })
   }
 
-  static pushToPosition<T> (array: T[], position, item: T): T[] {
+  static pushToPosition<T> (array: T[], position: number, item: T): T[] {
     const clone = [...array]
     clone.splice(position, 0, item)
     return clone

@@ -1,4 +1,3 @@
-
 export default class StringHelpers {
   static truncate (text: string, maxChars: number): string {
     if (!text) {
@@ -7,23 +6,31 @@ export default class StringHelpers {
     return text.length <= maxChars ? text : text.substring(0, maxChars) + '...'
   }
 
-  static toKebabCase(text: string){
-    return text.replace(/([a-z])([A-Z])/g, "$1-$2")
+  static toKebabCase (text: string) {
+    return text.replace(/([a-z])([A-Z])/g, '$1-$2')
       .replace(/(\s+|_)/g, '-')
-      .toLowerCase();
+      .toLowerCase()
   }
 
-  static toCamelCase(text: string){
+  static toCamelCase (text: string) {
     return text
-      .replace(/(\s|_)(.)/g, function($1) { return $1.toUpperCase(); })
+      .replace(/(\s|_)(.)/g, function ($1) {
+        return $1.toUpperCase()
+      })
       .replace(/\s|_/g, '')
-      .replace(/^(.)/, function($1) { return $1.toLowerCase(); });
+      .replace(/^(.)/, function ($1) {
+        return $1.toLowerCase()
+      })
   }
 
-  static toPascalCase(text: string){
+  static toPascalCase (text: string) {
     return text
-      .replace(/(\s|_|-)(.)/g, function($1) { return $1.toUpperCase(); })
+      .replace(/(\s|_|-)(.)/g, function ($1) {
+        return $1.toUpperCase()
+      })
       .replace(/\s|_|-/g, '')
-      .replace(/^(.)/, function($1) { return $1.toUpperCase(); });
+      .replace(/^(.)/, function ($1) {
+        return $1.toUpperCase()
+      })
   }
 }

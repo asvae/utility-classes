@@ -1,6 +1,6 @@
 import ObjectHelpers from './ObjectHelpers'
 
-export type ObjectOrArray = {[key: string]: any} | any[]
+export type ObjectOrArray = { [key: string]: any } | any[]
 
 export default class MappingHelpers {
   /**
@@ -16,7 +16,7 @@ export default class MappingHelpers {
    * and at other point as {data: {one: 1, two: 2}}. And we need to accommodate both
    * cases into one.
    */
-  static mapMerge (main: Object, auxiliary: Object = {}): Object | null {
+  static mapMerge (main: {[key: string]: any}, auxiliary: {[key: string]: any} = {}): Object | null {
     if (main) {
       return main
     }
@@ -72,7 +72,7 @@ export default class MappingHelpers {
     })
   }
 
-  static isIdObject (object: Object) {
+  static isIdObject (object: {[key: string]: any}) {
     const keys = Object.keys(object)
     return keys.length === 1 &&
       keys[0] === 'id' &&
@@ -101,7 +101,7 @@ export default class MappingHelpers {
    * Fill objects from one tree to another.
    */
   static hydrateTree (from: any, to: any, type: Function): void {
-    ObjectHelpers.traverseBranches(to, (toItem: any, parent: any, index: string) => {
+    ObjectHelpers.traverseBranches(to, (toItem: any, parent: any, index: string | number) => {
       // Check if item is getter. Ignore it if so.
       if (parent) {
         const descriptor = Object.getOwnPropertyDescriptor(parent, index)

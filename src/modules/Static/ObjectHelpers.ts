@@ -30,7 +30,7 @@ export default class ObjectHelpers {
    * @param criteria object
    * @returns {*}
    */
-  static traverseBranch (parent, criteria) {
+  static traverseBranch (parent: any, criteria: any): any[] {
     const result = ObjectHelpers.findNestedRecursive(parent, criteria)
     return result ? [parent, ...result] : []
   }
@@ -41,7 +41,7 @@ export default class ObjectHelpers {
    * @param criteria
    * @returns {*}
    */
-  static findNestedRecursive (parent, criteria) {
+  static findNestedRecursive (parent: any, criteria: any): any {
     if (!(Array.isArray(parent) || typeof parent === 'object')) {
       return null
     }
@@ -65,7 +65,10 @@ export default class ObjectHelpers {
    * Truthy value from closure stops traversing.
    * Won't traverse recursive nodes.
    */
-  static traverseBranches (parent: Object | any[], closure: (child, parent?, index?) => any, pool: any[] = []): void {
+  static traverseBranches (
+    parent: any,
+    closure: (child: any, parent: any, index: string | number) => any, pool: any[] = [],
+  ): void {
     if (pool.includes(parent)) {
       return
     }
@@ -84,7 +87,7 @@ export default class ObjectHelpers {
   /**
    * Traverse tree of object|array.
    */
-  static traverse (node: any, closure: (child, parent?, index?) => any) {
+  static traverse (node: any, closure: (child: any, parent?: any, index?: string | number) => any) {
     closure(node)
     ObjectHelpers.traverseBranches(node, closure)
   }
@@ -97,7 +100,7 @@ export default class ObjectHelpers {
    * @param criteria
    * @returns {boolean}
    */
-  static meetsCriteria (object: Object, criteria: Object) {
+  static meetsCriteria (object: { [key: string]: any }, criteria: { [key: string]: any }) {
     for (const index in criteria) {
       if (criteria[index] !== object[index]) {
         return false
@@ -109,7 +112,7 @@ export default class ObjectHelpers {
   /**
    * Check if object has array|object descendants.
    */
-  static hasDescendants (object: Object): Boolean {
+  static hasDescendants (object: { [key: string]: any }): Boolean {
     for (const index in object) {
       const item = object[index]
       if (item && typeof item === 'object') {
@@ -135,11 +138,11 @@ export default class ObjectHelpers {
   }
 
   /**
-   * Flatten array|object tree.
+   * Invert object key to avlues.
    */
-  static invert (object: Object): Object {
-    const invertedObject = {}
-    Object.keys(object).forEach(key => {
+  static invert (object: { [key: string]: string | number }): { [key: string]: string } {
+    const invertedObject: { [key: string]: string } = {}
+    Object.keys(object).map(key => {
       invertedObject[object[key]] = key
     })
     return invertedObject
@@ -151,8 +154,8 @@ export default class ObjectHelpers {
    *
    * NOTE: fast hack @d3
    */
-  static fresh (source, data: any): void {
-    const newObject = {}
+  static fresh (source: { [key: string]: any }, data: any): void {
+    const newObject: { [key: string]: any } = {}
     Object.keys(data).forEach(key => {
       if (!ValueHelpers.isEmpty(data[key])) {
         newObject[key] = data[key]

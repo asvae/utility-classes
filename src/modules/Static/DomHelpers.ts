@@ -6,7 +6,7 @@ export default class DomHelpers {
    * @param child possible child
    * @returns {boolean}
    */
-  static isChild (parent, child): boolean {
+  static isChild (parent: Node, child: Node): boolean {
     let node = child.parentNode
     while (node) {
       if (node === parent) {
@@ -23,12 +23,13 @@ export default class DomHelpers {
    * @param element
    * @returns {boolean}
    */
-  static isDetached (element): Boolean {
-    while (element) {
-      if (element === document) {
+  static isDetached (element: Node): boolean {
+    let tempElement: Node | null = element
+    while (tempElement) {
+      if (tempElement === document) {
         return false
       }
-      element = element.parentNode
+      tempElement = element.parentNode
     }
     return true
   }
@@ -37,7 +38,7 @@ export default class DomHelpers {
   /**
    * Detach node from current position and attach to new container
    */
-  static reattach (node, container) {
+  static reattach (node: HTMLElement, container: HTMLElement) {
     const parent = node.parentNode
     // No parent node? Abort!
     if (!parent || parent === container) {
@@ -48,18 +49,7 @@ export default class DomHelpers {
   }
 
   //TODO: make tests
-  static getLineHeight (element) {
-    let lineHeight = DomHelpers.computedStyle(element, 'line-height')
-    if (lineHeight == 'normal') {
-      // Normal line heights vary from browser to browser. The spec recommends
-      // a value between 1.0 and 1.2 of the font size. Using 1.2 to be safe.
-      lineHeight = parseInt(DomHelpers.computedStyle(element, 'font-size')) * 1.2
-    }
-    return parseInt(lineHeight)
-  }
-
-  //TODO: make tests
-  static computedStyle (el, prop, getComputedStyle?, style?) {
+  static computedStyle (el: any, prop: string, getComputedStyle?: any, style?: any) {
     getComputedStyle = window.getComputedStyle
     style =
       // If we have getComputedStyle
@@ -82,6 +72,17 @@ export default class DomHelpers {
         })
         ]
     }
+  }
+
+  //TODO: make tests
+  static getLineHeight (element: any) {
+    let lineHeight = DomHelpers.computedStyle(element, 'line-height')
+    if (lineHeight == 'normal') {
+      // Normal line heights vary from browser to browser. The spec recommends
+      // a value between 1.0 and 1.2 of the font size. Using 1.2 to be safe.
+      lineHeight = parseInt(DomHelpers.computedStyle(element, 'font-size')) * 1.2
+    }
+    return parseInt(lineHeight)
   }
 
   //TODO: make tests
@@ -109,7 +110,7 @@ export default class DomHelpers {
     return parent
   }
 
-  static getWidth (el: HTMLElement): Number {
+  static getWidth (el: HTMLElement): number {
     const result = DomHelpers.computedStyle(el, 'width')
     return parseInt(result)
   }

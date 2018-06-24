@@ -25,13 +25,13 @@ export default class DecimalHelpers {
   }
 
   /**
-   * returns number of digits after comma
+   * Returns number of digits after comma
    * @param num
    * @return {number}
    */
 
-  static decimalPlaces (num) {
-    const match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/)
+  static decimalPlaces (number: number | string): number {
+    const match = ('' + number).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/)
     if (!match) {
       return 0
     }

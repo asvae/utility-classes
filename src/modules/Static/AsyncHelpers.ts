@@ -11,7 +11,7 @@ export default class AsyncHelpers {
     })
   }
 
-  static waitConditional (condition, iterationTimeout = 20, maxTimeout = 2000, timeout = 2000) {
+  static waitConditional (condition: () => boolean, iterationTimeout = 20, maxTimeout = 2000, timeout = 2000) {
     if (!timeout) {
       throw new Error('Time expired but condition is not met')
     }

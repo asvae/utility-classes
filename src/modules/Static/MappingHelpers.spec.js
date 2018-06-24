@@ -14,13 +14,13 @@ describe('MappingHelpers', () => {
     it('handles undefined fields in auxiliary object', () => {
       expect(MappingHelpers.mapMerge(undefined, {
         from: undefined,
-        to: undefined
+        to: undefined,
       })).toBeNull()
     })
     it('casts when class is provided', () => {
       expect(MappingHelpers.mapMerge(undefined, {
         from: undefined,
-        to: undefined
+        to: undefined,
       })).toBeNull()
     })
   })
@@ -50,41 +50,41 @@ describe('MappingHelpers', () => {
   describe('fixes ids in', () => {
     it('simple object', () => {
       const unfixed = { one_id: 50 }
-      const fixed = { one: { id: 50 }}
+      const fixed = { one: { id: 50 } }
       MappingHelpers.fixIds(unfixed)
       expect(unfixed).toEqual(fixed)
     })
     it('nested object', () => {
-      const unfixed = { one: { two_id: 50 }}
-      const fixed = { one: { two: { id: 50 }}}
+      const unfixed = { one: { two_id: 50 } }
+      const fixed = { one: { two: { id: 50 } } }
       MappingHelpers.fixIds(unfixed)
       expect(unfixed).toEqual(fixed)
     })
     it('array', () => {
       const unfixed = [{ one_id: 50 }, { two_id: 51 }]
-      const fixed = [{ one: { id: 50 }}, { two: { id: 51 }}]
+      const fixed = [{ one: { id: 50 } }, { two: { id: 51 } }]
       MappingHelpers.fixIds(unfixed)
       expect(unfixed).toEqual(fixed)
     })
   })
   describe('unfixes ids in', () => {
     it('simple object', () => {
-      const fixed = { one: { id: 50 }}
-      const unfixed = { one_id: 50, one: { id: 50 }}
+      const fixed = { one: { id: 50 } }
+      const unfixed = { one_id: 50, one: { id: 50 } }
       MappingHelpers.unfixIds(fixed)
       expect(unfixed).toEqual(fixed)
     })
     it('nested object', () => {
-      const fixed = { one: { two: { id: 50 }}}
-      const unfixed = { one: { two_id: 50, two: { id: 50 }}}
+      const fixed = { one: { two: { id: 50 } } }
+      const unfixed = { one: { two_id: 50, two: { id: 50 } } }
       MappingHelpers.unfixIds(fixed)
       expect(unfixed).toEqual(fixed)
     })
     it('array', () => {
-      const fixed = [{ one: { id: 50 }}, { two: { id: 51 }}]
+      const fixed = [{ one: { id: 50 } }, { two: { id: 51 } }]
       const unfixed = [
-        { one_id: 50, one: { id: 50 }},
-        { two_id: 51, two: { id: 51 }}
+        { one_id: 50, one: { id: 50 } },
+        { two_id: 51, two: { id: 51 } },
       ]
       MappingHelpers.unfixIds(fixed)
       expect(unfixed).toEqual(fixed)
@@ -101,13 +101,13 @@ describe('MappingHelpers', () => {
     const fromTree = {
       items: [
         new TestClass({ id: 5, name: '5' }),
-      ]
+      ],
     }
 
     const toTree = {
       items: [
         new TestClass({ id: 5 }),
-      ]
+      ],
     }
 
     MappingHelpers.hydrateTree(fromTree, toTree, TestClass)
