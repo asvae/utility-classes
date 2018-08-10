@@ -1,14 +1,17 @@
 {
   "name": "asva-helpers",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple helper classes",
   "main": "dist/src/index.js",
+  "module" :"dist/src/index.esm.js",
   "types": "dist/src/index.d.ts",
   "private": false,
   "license": "MIT",
   "author": "Yauheni Prakopchyk",
   "scripts": {
-    "build": "webpack --progress --hide-modules --config src/build/webpack-config-build.js",
+    "build": "yarn build-webpack & yarn build-rollup",
+    "build-rollup": "rollup -c",
+    "build-webpack": "webpack --progress --hide-modules --config src/build/webpack-config-build.js",
     "test": "karma start --single-run",
     "test-dev": "karma start"
   },
@@ -30,6 +33,7 @@
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "rollup-plugin-typescript": "^0.8.1",
     "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^0.1.16",
     "html-webpack-plugin": "^3.2.0",
