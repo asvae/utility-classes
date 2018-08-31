@@ -1,8 +1,9 @@
 {
   "name": "asva-helpers",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Simple helper classes",
   "main": "dist/src/index.js",
+  "module": "dist/src/index.esm.js",
   "types": "dist/src/index.d.ts",
   "private": false,
   "license": "MIT",
@@ -26,13 +27,15 @@
     "url": "https://github.com/asvae/utility-classes/issues"
   },
   "homepage": "https://github.com/asvae/utility-classes#readme",
+  "dependencies": {
+    "tslib": "^1.9.3"
+  },
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
     "@types/node": "^9.6.2",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "rollup-plugin-typescript": "^0.8.1",
     "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^0.1.16",
     "html-webpack-plugin": "^3.2.0",
@@ -45,6 +48,7 @@
     "karma-typescript": "^3.0.12",
     "karma-webpack": "^3.0.0",
     "requirejs": "^2.3.5",
+    "rollup-plugin-typescript": "^0.8.1",
     "ts-loader": "^4.2.0",
     "typedoc": "^0.11.1",
     "typedoc-webpack-plugin": "^1.1.4",
